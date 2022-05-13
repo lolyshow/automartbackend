@@ -9,7 +9,6 @@ const CreateCar =async(req,res)=>{
         description: 'required',
         amount:'required',
     });
-    console.log("myREq",req.file)
     let validationFailed = true;
     await v.check().then((matched) => {
       if (!matched || !req.file.fieldname) {
@@ -19,7 +18,7 @@ const CreateCar =async(req,res)=>{
       }
     });
 
-    if(validationFailed === true){
+    if(validationFailed === true || amount<1){
       res.status(422).send({...v.errors, status:303});
     }
     else{
