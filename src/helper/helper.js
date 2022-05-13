@@ -20,8 +20,5 @@ function ResponsePayload(status=400,message="Technical Error",data = [], extras 
 
 
 module.exports = {
-    add,
-    AuthSuccessResponse,
-    AuthFailureResponse,
     ResponsePayload
 };
