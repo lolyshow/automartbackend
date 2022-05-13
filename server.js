@@ -31,11 +31,11 @@ app.use(function (req, res, next) {
     // Pass to next layer of middleware
     next();
 });
-app.use("/image", express.static("public/storage/"));
+app.use("/image", express.static("src/public/storage/"));
 app.post("/upload-image", (req, res) => {
         console.log(req.body.filename);
         return res.status(201)
-        .json({ url: "http://localhost:5000/image/" + "image_1652167085214greenlifelogo.jpeg" });
+        .json({ url: "http://localhost:5000/image/" + "image_1652422936586avatar2.jpg" });
 });
 app.use("/api/app",AppRoute);
 const listener = app.listen(process.env.PORT || 3000,() => {

@@ -24,8 +24,7 @@ var upload = multer({ storage: storage })
 
 router.use(express.static(__dirname + '/public'));
 router.use('/uploads', express.static('uploads'));
-
-router.post('/createCarss', upload.single('image'), CarController.CreateCar);
-router.post('/getAllProducts', CarController.FetchAllCars);
-router.post('/filterProducts', CarController.JoinProductsWithUser);
+router.post('/createCars', upload.single('image'), CarController.CreateCar);
+router.get('/getAllCars', CarController.FetchAllCars);
+router.post('/deleteCar', CarController.DeleteCar);
 module.exports = router;

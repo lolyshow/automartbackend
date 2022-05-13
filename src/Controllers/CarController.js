@@ -57,7 +57,25 @@ const CreateCar =async(req,res)=>{
     }
 }
 
+const DeleteCar =async (req,res)=>{
+    
+    const { id } = req.body;
+    console.log("IdToDelete",req.body);
+    try{
+        const cars = await Car.deleteOne({_id: id});
+        if (cars.deletedCount === 1) {
+            // console.log("Successfully deleted one document.");
+            return res.json(ResponsePayload(200,"Deletion Successfully"))
+          } else {
+                return res.json(ResponsePayload(300,"No documents matched the query. Deleted 0 documents."));
+          }
+    }
+    catch(error){
+        console.log(error)
+        return res.json(ResponsePayload());
+    }
 
+}
 
 
 const FetchAllCars =async(req,res)=>{
@@ -96,30 +114,10 @@ const FetchAllCars =async(req,res)=>{
     
 }
 
-
-const JoinProductsWithUser =async(req,res)=>{
-
-    try{
-        Product.find({},(error,result)=>{
-            if(error){
-                console.log(error)
-                res.status.json(ResponsePayload())
-            }else{
-                res.status(200).json(ResponsePayload(200,"Success",result))
-            }
-        })
-        .populate({path:"createdBy",select:["name","email"]}) //returns only the selected columns
-        // .populate("createdBy"); //this returns every thing 
-    }
-    catch(error){
-        console.log(error)
-    }
-    
-}
-
 module.exports={
     CreateCar,
     FetchAllCars,
-    JoinProductsWithUser
+    DeleteCar
+    
 }
 
